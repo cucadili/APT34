@@ -53,7 +53,7 @@ Running processes:
 Options for creating the first task:
 ![alt text](screen/param1.PNG "Param1")
 
-Options for creating the sekond task:
+Options for creating the seсond task:
 ![alt text](screen/param2.PNG "Param2")
 
 In the first case, a scheduled job named “Health Reports” is created to run the payload stored in srvHealth.exe every 4 minutes. 
